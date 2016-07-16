@@ -1,56 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/title_text_label"
-            android:textColor="@color/titleText"
-            android:background="@color/backgroundTextLabel"
-            android:text="@string/expolatory_search_label"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/details_text"
-            android:layout_margin="@dimen/text_detail_margin"
-            android:text="@string/expolatory_search_details"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/title_text_label"
-            android:textColor="@color/titleText"
-            android:background="@color/backgroundTextLabel"
-            android:text="@string/recommend_result_label"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/details_text"
-            android:layout_margin="@dimen/text_detail_margin"
-            android:text="@string/recommendation_details"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/title_text_label"
-            android:textColor="@color/titleText"
-            android:background="@color/backgroundTextLabel"
-            android:text="@string/understand_recommend_label"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/details_text"
-            android:layout_margin="@dimen/text_detail_margin"
-            android:text="@string/understand_details"/>
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/title_text_label"
+                android:paddingLeft="@dimen/title_text_padding_left"
+                android:paddingTop="@dimen/title_text_padding"
+                android:paddingBottom="@dimen/title_text_padding"
+                android:textColor="@color/titleText"
+                android:background="@color/backgroundTextLabel"
+                android:text="@string/expolatory_search_label"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/details_text"
+                android:paddingTop="@dimen/text_detail_padding"
+                android:paddingBottom="@dimen/text_detail_padding"
+                android:paddingLeft="@dimen/text_detail_padding_left"
+                android:paddingRight="@dimen/text_detail_padding"
+                android:text="@string/expolatory_search_details"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/title_text_label"
+                android:paddingLeft="@dimen/title_text_padding_left"
+                android:paddingTop="@dimen/title_text_padding"
+                android:paddingBottom="@dimen/title_text_padding"
+                android:textColor="@color/titleText"
+                android:background="@color/backgroundTextLabel"
+                android:text="@string/recommend_result_label"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/details_text"
+                android:paddingTop="@dimen/text_detail_padding"
+                android:paddingBottom="@dimen/text_detail_padding"
+                android:paddingLeft="@dimen/text_detail_padding_left"
+                android:paddingRight="@dimen/text_detail_padding"
+                android:text="@string/recommendation_details"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/title_text_label"
+                android:textColor="@color/titleText"
+                android:paddingLeft="@dimen/title_text_padding_left"
+                android:paddingTop="@dimen/title_text_padding"
+                android:paddingBottom="@dimen/title_text_padding"
+                android:background="@color/backgroundTextLabel"
+                android:text="@string/understand_recommend_label"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/details_text"
+                android:paddingTop="@dimen/text_detail_padding"
+                android:paddingBottom="@dimen/text_detail_padding"
+                android:paddingLeft="@dimen/text_detail_padding_left"
+                android:paddingRight="@dimen/text_detail_padding"
+                android:text="@string/understand_details"/>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_above="@+id/create_by"
+        android:background="@drawable/dotted" />
+
+    <TextView
+        android:id="@+id/create_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:textStyle="italic|bold"
+        android:textSize="@dimen/created_by_text_size"
+        android:text="@string/created_by"/>
+</RelativeLayout>
+

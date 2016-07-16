@@ -7,7 +7,7 @@
     <color name="navigationBarColor">#000000</color>
     <color name="colorAccent">#C8E6C9</color>
 
-    <color name="White">#FFFFFF</color>
+    <color name="header_text_color">#FFFFFF</color>
 
     <!--Home Fragment-->
     <color name="backgroundTextLabel">#66BB6A</color>

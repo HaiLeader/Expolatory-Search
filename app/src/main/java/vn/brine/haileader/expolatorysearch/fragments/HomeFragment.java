@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.hp.hpl.jena.query.QuerySolution;
@@ -47,18 +50,20 @@ public class HomeFragment extends Fragment
     public static final int SEARCH_TYPE_LMD = 3;
 
     private EditText mSearchText;
-    private Button mSearchAllButton;
-    private LinearLayout mTopResultLinear;
-    private LinearLayout mRecommendLinear;
-    private LinearLayout mIntrodutionLinear;
+    private Button mSearchBtn;
+    private RelativeLayout mSearchResultLayout;
+    private RelativeLayout mIntrodution;
     private RecyclerView mTopRecyclerView;
     private RecyclerView mRecommendRecyclerView;
+    private RecyclerView mItemSelectedRecyclerView;
 
     private MovieAdapter mTopAdapter;
     private MovieAdapter mRecommendAdapter;
+    private MovieAdapter mItemSelectedAdapter;
 
     private List<Movie> movieTopList;
     private List<Movie> movieRecommendList;
+    private List<Movie> movieSelectedList;
     private List<String> mListKeyword;
     private List<String> mListMovieType;
     private List<String> mListAllMovieType;
@@ -74,31 +79,59 @@ public class HomeFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        return rootView;
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        findIdLayout(view);
+        showIntroduction();
+        initializeOriginal();
+
+        mSearchBtn.setOnClickListener(this);
+        touchListenerRecyclerView();
+
+        mSearchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length() >= 3){
+                    //Toast.makeText(getContext(), mSearchText.getText().toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    private void findIdLayout(View view){
         mSearchText = (EditText) view.findViewById(R.id.searchText);
-        mSearchAllButton = (Button) view.findViewById(R.id.searchAll);
-        mTopResultLinear = (LinearLayout)view.findViewById(R.id.linear_top_result);
-        mRecommendLinear = (LinearLayout)view.findViewById(R.id.linear_recommend_result);
-        mIntrodutionLinear = (LinearLayout)view.findViewById(R.id.linear_tutorial);
+        mSearchBtn = (Button) view.findViewById(R.id.btn_search);
+        mSearchResultLayout = (RelativeLayout)view.findViewById(R.id.search_keyword_result_relative);
+        mIntrodution = (RelativeLayout) view.findViewById(R.id.app_introduction);
         mTopRecyclerView = (RecyclerView)view.findViewById(R.id.top_result_recycler_view);
         mRecommendRecyclerView = (RecyclerView)view.findViewById(R.id.recommend_result_recycler_view);
+        mItemSelectedRecyclerView = (RecyclerView)view.findViewById(R.id.item_selected_recycler_view);
+    }
 
-        showIntroduction();
-
+    private void initializeOriginal(){
         mListKeyword = new ArrayList<>();
         mListMovieType = new ArrayList<>();
         mListAllMovieType = getAllMovieType();
         movieTopList = new ArrayList<>();
         movieRecommendList = new ArrayList<>();
+        movieSelectedList = new ArrayList<>();
 
         mTopAdapter = new MovieAdapter(getContext(), movieTopList);
         mRecommendAdapter = new MovieAdapter(getContext(), movieRecommendList);
+        mItemSelectedAdapter = new MovieAdapter(getContext(), movieSelectedList);
 
         mTopRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mTopLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -114,11 +147,21 @@ public class HomeFragment extends Fragment
         mRecommendRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecommendRecyclerView.setAdapter(mRecommendAdapter);
 
-        mSearchAllButton.setOnClickListener(this);
+        mItemSelectedRecyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager mItemSelectedLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        mItemSelectedRecyclerView.setLayoutManager(mItemSelectedLayoutManager);
+        mItemSelectedRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.HORIZONTAL));
+        mItemSelectedRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mItemSelectedRecyclerView.setAdapter(mItemSelectedAdapter);
+    }
+
+    private void touchListenerRecyclerView(){
         mTopRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), mTopRecyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
                 Movie movie = movieTopList.get(position);
+                //TODO: Xu ly
+                updateDataItemSelected(movie);
                 Toast.makeText(getContext(), movie.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
             }
 
@@ -139,14 +182,12 @@ public class HomeFragment extends Fragment
                 Toast.makeText(getContext(), "Long click", Toast.LENGTH_SHORT).show();
             }
         }));
-
-        Toast.makeText(getContext(), mListAllMovieType.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.searchAll:
+            case R.id.btn_search:
                 String textSearch = mSearchText.getText().toString();
                 analyzeInputData(textSearch);
                 searchAll();
@@ -189,15 +230,13 @@ public class HomeFragment extends Fragment
     }
 
     private void showIntroduction(){
-        mTopResultLinear.setVisibility(View.GONE);
-        mRecommendLinear.setVisibility(View.GONE);
-        mIntrodutionLinear.setVisibility(View.VISIBLE);
+        mSearchResultLayout.setVisibility(View.GONE);
+        mIntrodution.setVisibility(View.VISIBLE);
     }
 
     private void hideIntroduction(){
-        mTopResultLinear.setVisibility(View.VISIBLE);
-        mRecommendLinear.setVisibility(View.VISIBLE);
-        mIntrodutionLinear.setVisibility(View.GONE);
+        mSearchResultLayout.setVisibility(View.VISIBLE);
+        mIntrodution.setVisibility(View.GONE);
     }
 
     private void analyzeInputData(String textSearch) {
@@ -302,6 +341,13 @@ public class HomeFragment extends Fragment
         Movie movie = new Movie(uri, null);
         movieRecommendList.add(movie);
         mRecommendAdapter.notifyDataSetChanged();
+    }
+
+    private void updateDataItemSelected(Movie movie){
+        if(!movieSelectedList.contains(movie)){
+            movieSelectedList.add(movie);
+            mItemSelectedAdapter.notifyDataSetChanged();
+        }
     }
 
     private void showLog(String tag, String message){
