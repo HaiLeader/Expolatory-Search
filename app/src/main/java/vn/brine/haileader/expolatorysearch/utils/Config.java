@@ -9,17 +9,31 @@ public class Config {
     public static final String WIKIDATA_ENDPOINT = "http://query.wikidata.org";
     public static final String PREFIX_LINKEDMDB =
             "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" +
-                    "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
-                    "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
-                    "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                    "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" +
-                    "PREFIX oddlinker: <http://data.linkedmdb.org/resource/oddlinker/>\n" +
-                    "PREFIX map: <file:/C:/d2r-server-0.4/mapping.n3#>\n" +
-                    "PREFIX db: <http://data.linkedmdb.org/resource/>\n" +
-                    "PREFIX dbpedia: <http://dbpedia.org/property/>\n" +
-                    "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n" +
-                    "PREFIX dc: <http://purl.org/dc/terms/>\n" +
-                    "PREFIX movie: <http://data.linkedmdb.org/resource/movie/>";
+            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
+            "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
+            "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+            "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" +
+            "PREFIX oddlinker: <http://data.linkedmdb.org/resource/oddlinker/>\n" +
+            "PREFIX map: <file:/C:/d2r-server-0.4/mapping.n3#>\n" +
+            "PREFIX db: <http://data.linkedmdb.org/resource/>\n" +
+            "PREFIX dbpedia: <http://dbpedia.org/property/>\n" +
+            "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n" +
+            "PREFIX dc: <http://purl.org/dc/terms/>\n" +
+            "PREFIX movie: <http://data.linkedmdb.org/resource/movie/>";
+
+    public static final String PREFIX_DBPEDIA =
+            "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" +
+            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
+            "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
+            "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+            "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n" +
+            "PREFIX dc: <http://purl.org/dc/elements/1.1/>\n" +
+            "PREFIX : <http://dbpedia.org/resource/>\n" +
+            "PREFIX dbpedia2: <http://dbpedia.org/property/>\n" +
+            "PREFIX dbpedia: <http://dbpedia.org/>\n" +
+            "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n" +
+            "PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>\n" +
+            "PREFIX dbpprop: <http://www.w3.org/2006/03/wn/wn20/instances/synset-movie-noun-1>";
 
     public static final String[] STOP_WORD =
             {

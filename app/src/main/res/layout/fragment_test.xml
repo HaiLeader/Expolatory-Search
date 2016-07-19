@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.TestFragment">
+
+    <include layout="@layout/search_box"/>
+
+    <include
+        android:id="@+id/search_keyword_result_relative"
+        layout="@layout/search_keyword_result"/>
+
+    <include
+        android:id="@+id/app_introduction"
+        layout="@layout/app_introduction"/>
+
+</LinearLayout>

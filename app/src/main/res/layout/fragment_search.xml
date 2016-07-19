@@ -3,16 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.HomeFragment">
+    tools:context=".fragments.SearchFragment">
 
     <include layout="@layout/search_box"/>
-
     <include
-        android:id="@+id/search_keyword_result_relative"
+        android:id="@+id/search_result"
         layout="@layout/search_keyword_result"/>
 
-    <include
-        android:id="@+id/app_introduction"
-        layout="@layout/app_introduction"/>
-
+    <!--<include-->
+        <!--android:id="@+id/app_introduction"-->
+        <!--layout="@layout/app_introduction"/>-->
 </LinearLayout>

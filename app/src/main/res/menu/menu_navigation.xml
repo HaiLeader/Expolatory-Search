@@ -5,7 +5,7 @@
                 android:id="@+id/home"
                 android:title="@string/title_home"
                 android:checked="true"
-                android:icon="@drawable/ic_home"/>
+                android:icon="@drawable/ic_search"/>
             <item
                 android:id="@+id/whatshot"
                 android:title="@string/whats_hot"

@@ -8,8 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -18,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -41,10 +38,10 @@ import vn.brine.haileader.expolatorysearch.utils.QueryAssistant;
 /**
  * Created by HaiLeader on 7/15/2016.
  */
-public class HomeFragment extends Fragment
+public class TestFragment extends Fragment
         implements View.OnClickListener, SearchDataLMD.OnTaskCompleted, SearchListKeywordLMD.OnTaskCompleted{
 
-    public static final String TAG = HomeFragment.class.getSimpleName();
+    public static final String TAG = TestFragment.class.getSimpleName();
     public static final int SEARCH_ACCURATE = 1;
     public static final int SEARCH_EXPAND = 2;
     public static final int SEARCH_TYPE_LMD = 3;
@@ -55,20 +52,17 @@ public class HomeFragment extends Fragment
     private RelativeLayout mIntrodution;
     private RecyclerView mTopRecyclerView;
     private RecyclerView mRecommendRecyclerView;
-    private RecyclerView mItemSelectedRecyclerView;
 
     private MovieAdapter mTopAdapter;
     private MovieAdapter mRecommendAdapter;
-    private MovieAdapter mItemSelectedAdapter;
 
     private List<Movie> movieTopList;
     private List<Movie> movieRecommendList;
-    private List<Movie> movieSelectedList;
     private List<String> mListKeyword;
     private List<String> mListMovieType;
     private List<String> mListAllMovieType;
 
-    public HomeFragment() {
+    public TestFragment() {
     }
 
     @Override
@@ -79,7 +73,7 @@ public class HomeFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_test, container, false);
     }
 
     @Override
@@ -92,23 +86,6 @@ public class HomeFragment extends Fragment
 
         mSearchBtn.setOnClickListener(this);
         touchListenerRecyclerView();
-
-        mSearchText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length() >= 3){
-                    //Toast.makeText(getContext(), mSearchText.getText().toString(), Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
     }
 
     private void findIdLayout(View view){
@@ -116,9 +93,8 @@ public class HomeFragment extends Fragment
         mSearchBtn = (Button) view.findViewById(R.id.btn_search);
         mSearchResultLayout = (RelativeLayout)view.findViewById(R.id.search_keyword_result_relative);
         mIntrodution = (RelativeLayout) view.findViewById(R.id.app_introduction);
-        mTopRecyclerView = (RecyclerView)view.findViewById(R.id.top_result_recycler_view);
-        mRecommendRecyclerView = (RecyclerView)view.findViewById(R.id.recommend_result_recycler_view);
-        mItemSelectedRecyclerView = (RecyclerView)view.findViewById(R.id.item_selected_recycler_view);
+        mTopRecyclerView = (RecyclerView)view.findViewById(R.id.top_result_recycler);
+        mRecommendRecyclerView = (RecyclerView)view.findViewById(R.id.recommend_result_recycler);
     }
 
     private void initializeOriginal(){
@@ -127,11 +103,9 @@ public class HomeFragment extends Fragment
         mListAllMovieType = getAllMovieType();
         movieTopList = new ArrayList<>();
         movieRecommendList = new ArrayList<>();
-        movieSelectedList = new ArrayList<>();
 
         mTopAdapter = new MovieAdapter(getContext(), movieTopList);
         mRecommendAdapter = new MovieAdapter(getContext(), movieRecommendList);
-        mItemSelectedAdapter = new MovieAdapter(getContext(), movieSelectedList);
 
         mTopRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mTopLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -146,13 +120,6 @@ public class HomeFragment extends Fragment
         mRecommendRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.HORIZONTAL));
         mRecommendRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecommendRecyclerView.setAdapter(mRecommendAdapter);
-
-        mItemSelectedRecyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager mItemSelectedLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        mItemSelectedRecyclerView.setLayoutManager(mItemSelectedLayoutManager);
-        mItemSelectedRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.HORIZONTAL));
-        mItemSelectedRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mItemSelectedRecyclerView.setAdapter(mItemSelectedAdapter);
     }
 
     private void touchListenerRecyclerView(){
@@ -161,7 +128,7 @@ public class HomeFragment extends Fragment
             public void onClick(View view, int position) {
                 Movie movie = movieTopList.get(position);
                 //TODO: Xu ly
-                updateDataItemSelected(movie);
+//                updateDataItemSelected(movie);
                 Toast.makeText(getContext(), movie.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
             }
 
@@ -189,6 +156,7 @@ public class HomeFragment extends Fragment
         switch (v.getId()) {
             case R.id.btn_search:
                 String textSearch = mSearchText.getText().toString();
+                if (textSearch.equals("")) return;
                 analyzeInputData(textSearch);
                 searchAll();
                 hideIntroduction();
@@ -240,7 +208,6 @@ public class HomeFragment extends Fragment
     }
 
     private void analyzeInputData(String textSearch) {
-        if (textSearch.equals("")) return;
         splitDataToArrayKey(textSearch);
         expandSearchKeywordType();
     }
@@ -332,22 +299,15 @@ public class HomeFragment extends Fragment
     }
 
     private void updateDataTop(String uri){
-        Movie movie = new Movie(uri, null);
+        Movie movie = new Movie(uri, null, null);
         movieTopList.add(movie);
         mTopAdapter.notifyDataSetChanged();
     }
 
     private void updateDataRecommend(String uri){
-        Movie movie = new Movie(uri, null);
+        Movie movie = new Movie(uri, null, null);
         movieRecommendList.add(movie);
         mRecommendAdapter.notifyDataSetChanged();
-    }
-
-    private void updateDataItemSelected(Movie movie){
-        if(!movieSelectedList.contains(movie)){
-            movieSelectedList.add(movie);
-            mItemSelectedAdapter.notifyDataSetChanged();
-        }
     }
 
     private void showLog(String tag, String message){
@@ -357,9 +317,9 @@ public class HomeFragment extends Fragment
     public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
         private GestureDetector gestureDetector;
-        private HomeFragment.ClickListener clickListener;
+        private TestFragment.ClickListener clickListener;
 
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final HomeFragment.ClickListener clickListener) {
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final TestFragment.ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override

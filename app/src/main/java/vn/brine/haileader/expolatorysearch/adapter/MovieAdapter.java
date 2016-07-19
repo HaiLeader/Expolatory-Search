@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import vn.brine.haileader.expolatorysearch.R;
@@ -35,8 +37,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
         Movie movie = moviesList.get(position);
-        holder.title.setText(movie.getTitle());
-        holder.image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_profile));
+        holder.textViewTitle.setText(movie.getTitle());
+        holder.textViewUri.setText(movie.getUri());
+        if(movie.getThumbnail() != null){
+            Picasso.with(mContext)
+                    .load(movie.getThumbnail())
+                    .placeholder(R.drawable.ic_placeholder)
+                    .error(R.drawable.dbpedia_default)
+                    .resize(200, 100)
+                    .centerCrop()
+                    .into(holder.itemImageView);
+        }else{
+            holder.itemImageView.setImageResource(R.drawable.dbpedia_default);
+        }
+
     }
 
     @Override
@@ -46,13 +60,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     public class MovieViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView title;
-        public ImageView image;
+        public TextView textViewTitle;
+        public ImageView itemImageView;
+        public TextView textViewUri;
 
         public MovieViewHolder(View view) {
             super(view);
-            title = (TextView)view.findViewById(R.id.titleTextView);
-            image = (ImageView)view.findViewById(R.id.itemImageView);
+            textViewTitle = (TextView)view.findViewById(R.id.titleTextView);
+            itemImageView = (ImageView)view.findViewById(R.id.itemImageView);
+            textViewUri = (TextView)view.findViewById(R.id.uriTextView);
         }
     }
 }

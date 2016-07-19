@@ -3,7 +3,6 @@ package vn.brine.haileader.expolatorysearch.asynctasks;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
@@ -14,7 +13,7 @@ import com.hp.hpl.jena.query.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import vn.brine.haileader.expolatorysearch.fragments.HomeFragment;
+import vn.brine.haileader.expolatorysearch.fragments.TestFragment;
 import vn.brine.haileader.expolatorysearch.utils.Config;
 import vn.brine.haileader.expolatorysearch.utils.DataAssistant;
 import vn.brine.haileader.expolatorysearch.utils.QueryAssistant;
@@ -52,17 +51,16 @@ public class SearchListKeywordLMD extends AsyncTask<List<String>, Void, List<Res
     protected List<ResultSet> doInBackground(List<String>... params) {
         List<ResultSet> resultSetList = new ArrayList<ResultSet>();
         List<String> keywordList = params[0];
-        Log.d(TAG, keywordList.toString());
 
         for(String keyword : keywordList){
             if (DataAssistant.isStopWord(keyword)) continue;
             String queryString = "";
-            if(mTypeSearch == HomeFragment.SEARCH_ACCURATE){
+            if(mTypeSearch == TestFragment.SEARCH_ACCURATE){
                 queryString = QueryAssistant.searchAccurateQuery(keyword);
-            }else if(mTypeSearch == HomeFragment.SEARCH_EXPAND){
+            }else if(mTypeSearch == TestFragment.SEARCH_EXPAND){
                 queryString = QueryAssistant.searchExpandQuery(keyword);
             }
-            Log.d(TAG, queryString);
+
             Query query = QueryFactory.create(queryString);
             QueryExecution queryExecution = QueryExecutionFactory.createServiceRequest(Config.LINKEDMDB_ENDPOINT, query);
             ResultSet resultSet = queryExecution.execSelect();

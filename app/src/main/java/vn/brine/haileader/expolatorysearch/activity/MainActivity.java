@@ -1,4 +1,4 @@
-package vn.brine.haileader.expolatorysearch;
+package vn.brine.haileader.expolatorysearch.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -14,10 +14,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import vn.brine.haileader.expolatorysearch.R;
 import vn.brine.haileader.expolatorysearch.fragments.FavoriteFragment;
-import vn.brine.haileader.expolatorysearch.fragments.HomeFragment;
-import vn.brine.haileader.expolatorysearch.fragments.NewFragment;
+import vn.brine.haileader.expolatorysearch.fragments.SearchFragment;
 import vn.brine.haileader.expolatorysearch.fragments.SettingFragment;
+import vn.brine.haileader.expolatorysearch.fragments.TestFragment;
+import vn.brine.haileader.expolatorysearch.fragments.WhatsHotFragment;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -40,8 +42,9 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
         if (getFragmentManager().findFragmentById(R.id.container_body) == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_body, new HomeFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_body, new SearchFragment()).commit();
         }
+
     }
 
     public void setupDrawerContent(NavigationView navigationView ) {
@@ -59,10 +62,10 @@ public class MainActivity extends AppCompatActivity {
         Class fragmentClass = null;
         switch (menuItem.getItemId()){
             case R.id.home:
-                fragmentClass = HomeFragment.class;
+                fragmentClass = SearchFragment.class;
                 break;
             case R.id.whatshot:
-                fragmentClass = NewFragment.class;
+                fragmentClass = WhatsHotFragment.class;
                 break;
             case R.id.favorites:
                 fragmentClass = FavoriteFragment.class;
@@ -74,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 break;
             default:
-                fragmentClass = HomeFragment.class;
+                fragmentClass = TestFragment.class;
         }
         try {
             assert fragmentClass != null;
@@ -139,4 +142,5 @@ public class MainActivity extends AppCompatActivity {
         // Pass any configuration change to the drawer toggles
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
+
 }
