@@ -25,5 +25,7 @@
     <string name="understand_recommend_label">Understand a recommendation</string>
     <string name="understand_details">System gives you recommendations, but also tools to understand why you have these recommendations, because we know that the more important in a recommendation is to know why you get it !</string>
     <string name="created_by">Created by HaiLeader</string>
+    <string name="title_activity_favorite">FavoriteActivity</string>
+    <string name="title_activity_whats_hot">WhatsHotActivity</string>
 
 </resources>

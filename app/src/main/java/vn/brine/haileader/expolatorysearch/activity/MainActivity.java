@@ -16,7 +16,7 @@ import android.view.View;
 
 import vn.brine.haileader.expolatorysearch.R;
 import vn.brine.haileader.expolatorysearch.fragments.FavoriteFragment;
-import vn.brine.haileader.expolatorysearch.fragments.SearchFragment;
+import vn.brine.haileader.expolatorysearch.fragments.SearchTabFragment;
 import vn.brine.haileader.expolatorysearch.fragments.SettingFragment;
 import vn.brine.haileader.expolatorysearch.fragments.TestFragment;
 import vn.brine.haileader.expolatorysearch.fragments.WhatsHotFragment;
@@ -34,15 +34,15 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
         navigationView = (NavigationView)findViewById(R.id.navigation_view);
         actionBarDrawerToggle = setupDrawerToggle();
 
         setupDrawerContent(navigationView);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
-        if (getFragmentManager().findFragmentById(R.id.container_body) == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_body, new SearchFragment()).commit();
+        if (getFragmentManager().findFragmentById(R.id.containerView) == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.containerView, new SearchTabFragment()).commit();
         }
 
     }
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         Class fragmentClass = null;
         switch (menuItem.getItemId()){
             case R.id.home:
-                fragmentClass = SearchFragment.class;
+                fragmentClass = SearchTabFragment.class;
                 break;
             case R.id.whatshot:
                 fragmentClass = WhatsHotFragment.class;
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.container_body, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.containerView, fragment).commit();
 
         menuItem.setChecked(true);
         setTitle(menuItem.getTitle());
