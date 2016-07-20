@@ -25,9 +25,10 @@ public class SearchTabFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View x =  inflater.inflate(R.layout.fragment_search_tab,null);
-        tabLayout = (TabLayout) x.findViewById(R.id.tab_layout);
-        viewPager = (ViewPager) x.findViewById(R.id.viewpager);
+        View view =  inflater.inflate(R.layout.fragment_search_tab,null);
+
+        tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
 
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
 
@@ -37,7 +38,7 @@ public class SearchTabFragment extends Fragment {
                 tabLayout.setupWithViewPager(viewPager);
             }
         });
-        return x;
+        return view;
     }
 
     class MyAdapter extends FragmentPagerAdapter {

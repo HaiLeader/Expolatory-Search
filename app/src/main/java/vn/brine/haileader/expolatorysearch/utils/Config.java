@@ -33,7 +33,8 @@ public class Config {
             "PREFIX dbpedia: <http://dbpedia.org/>\n" +
             "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\n" +
             "PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>\n" +
-            "PREFIX dbpprop: <http://www.w3.org/2006/03/wn/wn20/instances/synset-movie-noun-1>";
+            "PREFIX dbpprop: <http://www.w3.org/2006/03/wn/wn20/instances/synset-movie-noun-1>\n" +
+            "PREFIX dcterms: <http://purl.org/dc/terms/>";
 
     public static final String[] STOP_WORD =
             {
