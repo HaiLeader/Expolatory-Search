@@ -9,18 +9,15 @@ import android.view.ViewGroup;
 
 import vn.brine.haileader.expolatorysearch.R;
 
-public class NewFragment extends Fragment {
+public class MusicFragment extends Fragment {
 
-
-    public NewFragment() {
+    public MusicFragment() {
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new, container, false);
+        return inflater.inflate(R.layout.fragment_music, container, false);
     }
 
 }

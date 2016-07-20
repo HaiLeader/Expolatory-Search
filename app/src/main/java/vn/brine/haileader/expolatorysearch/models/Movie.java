@@ -6,11 +6,13 @@ package vn.brine.haileader.expolatorysearch.models;
 public class Movie {
 
     private String title;
-    private String imageUrl;
+    private String thumbnail;
+    private String uri;
 
-    public Movie(String title, String imageUrl){
+    public Movie(String title, String thumbnail, String uri){
         this.title = title;
-        this.imageUrl = imageUrl;
+        setThumbnail(thumbnail);
+        this.uri = uri;
     }
 
     public void setTitle(String title){
@@ -21,11 +23,21 @@ public class Movie {
         return title;
     }
 
-    public String getImageUrl(){
-        return imageUrl;
+    public String getThumbnail() {
+        return thumbnail;
     }
 
-    public void setImage(String imageUrl){
-        this.imageUrl = imageUrl;
+    public void setThumbnail(String imageUrl){
+        if(imageUrl == null) return;
+        String httpsLink = imageUrl.replace("http://", "https://");
+        this.thumbnail = httpsLink;
+    }
+
+    public void setUri(String uri){
+        this.uri = uri;
+    }
+
+    public String getUri(){
+        return uri;
     }
 }
