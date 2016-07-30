@@ -23,17 +23,22 @@ import vn.brine.haileader.expolatorysearch.utils.QueryAssistant;
 public class SlidingWindowDbpedia extends AsyncTask<List<String>, Void, List<ResultSet>> {
 
     public final static String TAG = "SearchDataDbPedia";
+    private Context mContext;
     private OnTaskCompleted mOnTaskCompleted;
     private ProgressDialog mProgressDialog;
 
     public SlidingWindowDbpedia(Context context, OnTaskCompleted onTaskCompleted){
         this.mOnTaskCompleted = onTaskCompleted;
-        mProgressDialog = new ProgressDialog(context);
+        mContext = context;
+        mProgressDialog = new ProgressDialog(mContext);
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        if(mProgressDialog == null){
+            mProgressDialog = new ProgressDialog(mContext);
+        }
         mProgressDialog.setMessage("Loading...");
         mProgressDialog.show();
     }

@@ -24,7 +24,6 @@ import vn.brine.haileader.expolatorysearch.fragments.WhatsHotFragment;
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-    private NavigationView navigationView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
@@ -35,20 +34,24 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
-        navigationView = (NavigationView)findViewById(R.id.navigation_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         actionBarDrawerToggle = setupDrawerToggle();
 
         setupDrawerContent(navigationView);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
         if (getFragmentManager().findFragmentById(R.id.containerView) == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.containerView, new SearchTabFragment()).commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.containerView, new SearchTabFragment())
+                    .commit();
         }
 
     }
 
     public void setupDrawerContent(NavigationView navigationView ) {
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 selectDrawerItem(menuItem);
@@ -96,7 +99,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
-        return new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
+        return new ActionBarDrawerToggle(this,drawerLayout,toolbar,
+                R.string.drawer_open,R.string.drawer_close){
             @Override
             public void onDrawerClosed(View v){
                 super.onDrawerClosed(v);
