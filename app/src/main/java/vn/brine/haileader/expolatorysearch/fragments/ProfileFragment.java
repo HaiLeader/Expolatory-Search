@@ -12,11 +12,11 @@ import vn.brine.haileader.expolatorysearch.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WhatsHotFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
+    private static final String TAG = ProfileFragment.class.getSimpleName();
 
-    public WhatsHotFragment() {
-        // Required empty public constructor
+    public ProfileFragment() {
     }
 
 
@@ -24,7 +24,7 @@ public class WhatsHotFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_whats_hot, container, false);
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
 }

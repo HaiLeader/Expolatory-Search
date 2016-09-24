@@ -1,0 +1,83 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.ProfileFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:text="@string/input_profile_infomation"/>
+
+                <EditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:hint="@string/enter_your_name"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:text="@string/gender"/>
+
+                <RadioGroup
+                    android:id="@+id/radioSex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioMale"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/radio_male"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:checked="true"/>
+
+                    <RadioButton
+                        android:id="@+id/radioFemale"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/radio_female"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:layout_weight="1"/>
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/myHobby"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:hint="@string/my_hobby"/>
+
+                <EditText
+                    android:id="@+id/genre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:hint="@string/favorite_genre"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </ScrollView>
+</FrameLayout>
+

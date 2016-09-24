@@ -27,5 +27,12 @@
     <string name="created_by">Created by HaiLeader</string>
     <string name="title_activity_favorite">FavoriteActivity</string>
     <string name="title_activity_whats_hot">WhatsHotActivity</string>
+    <string name="input_profile_infomation">Nhập thông tin người dùng!</string>
+    <string name="enter_your_name">Nhập tên</string>
+    <string name="gender">Giới tính</string>
+    <string name="radio_male">Nam</string>
+    <string name="radio_female">Nữ</string>
+    <string name="my_hobby">Nhập sở thích về âm nhạc</string>
+    <string name="favorite_genre">Nhập thể loại nhạc</string>
 
 </resources>

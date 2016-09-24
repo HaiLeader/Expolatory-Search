@@ -94,16 +94,6 @@ public class MovieFragment extends Fragment
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-    @Override
     public void onAsyncTaskCompletedSlidingWindow(List<ResultSet> resultSets) {
         if(resultSets == null) return;
         for(ResultSet resultSet : resultSets){
