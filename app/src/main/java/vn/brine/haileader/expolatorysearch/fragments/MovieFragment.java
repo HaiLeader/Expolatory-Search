@@ -1,6 +1,5 @@
 package vn.brine.haileader.expolatorysearch.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;

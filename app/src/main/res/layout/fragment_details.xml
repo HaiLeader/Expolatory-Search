@@ -1,0 +1,193 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="vn.brine.haileader.expolatorysearch.fragments.DetailsFragment">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:elevation="4dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_16sdp">
+
+            <ImageView
+                android:id="@+id/image_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/dbpedia_image_example"/>
+
+            <LinearLayout
+                android:id="@+id/ln_label"
+                android:layout_below="@+id/image_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:paddingTop="@dimen/_10sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Label:"
+                    android:textAppearance="@android:style/TextAppearance.Material.Title"/>
+
+                <TextView
+                    android:id="@+id/tv_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="Pham van hai"
+                    android:textAppearance="@android:style/TextAppearance.Material.Title"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ln_moreinfo"
+                android:layout_below="@+id/ln_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/_10sdp">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="Why be recommended?"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="Search exploratory"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ln_artist"
+                android:layout_below="@+id/ln_moreinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="left"
+                android:paddingTop="@dimen/_10sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Artist:"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body2"/>
+
+                <TextView
+                    android:id="@+id/tv_artist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="John jackson"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ln_producer"
+                android:layout_below="@+id/ln_artist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="left"
+                android:paddingTop="@dimen/_10sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Producer:"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body2"/>
+
+                <TextView
+                    android:id="@+id/tv_producer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="John producer"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ln_genre"
+                android:layout_below="@+id/ln_producer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="left"
+                android:paddingTop="@dimen/_10sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Genre:"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body2"/>
+
+                <TextView
+                    android:id="@+id/tv_genre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="Rock, Classic"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ln_releaseDate"
+                android:layout_below="@+id/ln_genre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="left"
+                android:paddingTop="@dimen/_10sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Release Date:"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body2"/>
+
+                <TextView
+                    android:id="@+id/tv_releaseDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="28 - 06 - 2015"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body1"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ln_abstract"
+                android:layout_below="@+id/ln_releaseDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="left"
+                android:paddingTop="@dimen/_10sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Abstract:"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body2"/>
+
+                <TextView
+                    android:id="@+id/tv_abstract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:text="Pham van hai pham van hai pham van hai pham van hai pham van hai pham van hai"
+                    android:textAppearance="@android:style/TextAppearance.Material.Body1"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>

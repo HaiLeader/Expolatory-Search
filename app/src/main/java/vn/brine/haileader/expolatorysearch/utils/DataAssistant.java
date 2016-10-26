@@ -8,7 +8,7 @@ import java.util.List;
  * Created by HaiLeader on 7/15/2016.
  */
 public class DataAssistant {
-    public static List<String> splitTextSearchToPhrase(String textSearch) {
+        public static List<String> splitTextSearchToPhrase(String textSearch) {
         List<String> mListKeyWord = new ArrayList<String>();
 
         String[] splitTextSearch = textSearch.split(" ");
