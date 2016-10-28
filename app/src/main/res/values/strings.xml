@@ -38,5 +38,14 @@
     <string name="menu_option_details">Details</string>
     <string name="menu_option_add_search">Add search</string>
     <string name="menu_option_search_exploratory">Search exploratory</string>
+    <string name="label_title">Label:</string>
+    <string name="label_artist">Artist:</string>
+    <string name="label_producer">Producer:</string>
+    <string name="label_genre">Genre:</string>
+    <string name="label_release_date">Release Date:</string>
+    <string name="label_abstract">Abstract:</string>
+    <string name="label_why_be_recommended">Why be recommended?</string>
+    <string name="label_search_exploratory">Search exploratory</string>
+    <string name="btn_search">Search</string>
 
 </resources>

@@ -31,6 +31,7 @@ import vn.brine.haileader.expolatorysearch.adapter.SearchResultAdapter;
 import vn.brine.haileader.expolatorysearch.dbpedia.asynctasks.SlidingWindowAsynctask;
 import vn.brine.haileader.expolatorysearch.models.DividerItemDecoration;
 import vn.brine.haileader.expolatorysearch.models.SearchResult;
+import vn.brine.haileader.expolatorysearch.utils.NetworkHelper;
 import vn.brine.haileader.expolatorysearch.views.RecyclerItemClickListener;
 
 public class MusicFragment extends Fragment implements View.OnClickListener,
@@ -47,6 +48,8 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     private List<String> mListKeyword;
     private List<SearchResult> mListsearchResult;
 
+    private boolean isNetworkAvaiable = true;
+
     public MusicFragment() {
     }
 
@@ -62,6 +65,15 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         createUI(view);
         init();
         recyclerViewListener();
+        if(NetworkHelper.isInternetAvailable(getContext()))
+        {
+            isNetworkAvaiable = true;
+        }
+        else
+        {
+            isNetworkAvaiable = false;
+            Toast.makeText(getContext(),"No Network connection available", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void createUI(View view){
@@ -207,8 +219,11 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     private void slidingWindowSearch(){
         if(mListKeyword == null) return;
         mListsearchResult.clear();
-        new SlidingWindowAsynctask(getContext(), this).execute(mListKeyword);
-        //test();
+        if(isNetworkAvaiable){
+            new SlidingWindowAsynctask(getContext(), this).execute(mListKeyword);
+        }else{
+            showLogAndToast("No Network connection available");
+        }
     }
 
 //    private void loadUserInfo(){

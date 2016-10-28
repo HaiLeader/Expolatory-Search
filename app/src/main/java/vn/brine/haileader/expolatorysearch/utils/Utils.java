@@ -58,8 +58,6 @@ public class Utils {
                 "WHERE {\n" +
                 " {<" + uri + "> rdfs:label ?label ;\n" +
                 "   dbpedia-owl:abstract ?abstract .\n" +
-                "  FILTER langMatches( lang(?label), \"en\")\n" +
-                "  FILTER langMatches( lang(?abstract), \"en\")\n" +
                 " }\n" +
                 " UNION{ <" + uri + "> dbpedia-owl:artist ?artist . }\n" +
                 " UNION{ <" + uri + "> dbpedia-owl:genre ?genre . }\n" +
@@ -67,6 +65,9 @@ public class Utils {
                 " UNION{ <" + uri + "> dbpedia-owl:producer ?producer. }\n" +
                 " UNION{ <" + uri + "> dbpedia-owl:thumbnail ?thumbnail .}\n" +
                 "}";
+
+//        "  FILTER langMatches( lang(?label), \"en\")\n" +
+//                "  FILTER langMatches( lang(?abstract), \"en\")\n" +
         return queryString;
     }
 }
