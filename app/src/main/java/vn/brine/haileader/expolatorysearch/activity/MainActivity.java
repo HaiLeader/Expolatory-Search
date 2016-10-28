@@ -16,10 +16,10 @@ import android.view.View;
 
 import vn.brine.haileader.expolatorysearch.R;
 import vn.brine.haileader.expolatorysearch.fragments.FavoriteFragment;
-import vn.brine.haileader.expolatorysearch.fragments.SearchTabFragment;
+import vn.brine.haileader.expolatorysearch.fragments.MusicFragment;
 import vn.brine.haileader.expolatorysearch.fragments.SettingFragment;
 import vn.brine.haileader.expolatorysearch.fragments.TestFragment;
-import vn.brine.haileader.expolatorysearch.fragments.WhatsHotFragment;
+import vn.brine.haileader.expolatorysearch.fragments.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -41,9 +41,8 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
         if (getFragmentManager().findFragmentById(R.id.containerView) == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.containerView, new SearchTabFragment())
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.containerView, new MusicFragment())
                     .commit();
         }
 
@@ -65,10 +64,10 @@ public class MainActivity extends AppCompatActivity {
         Class fragmentClass = null;
         switch (menuItem.getItemId()){
             case R.id.home:
-                fragmentClass = SearchTabFragment.class;
+                fragmentClass = MusicFragment.class;
                 break;
             case R.id.whatshot:
-                fragmentClass = WhatsHotFragment.class;
+                fragmentClass = ProfileFragment.class;
                 break;
             case R.id.favorites:
                 fragmentClass = FavoriteFragment.class;

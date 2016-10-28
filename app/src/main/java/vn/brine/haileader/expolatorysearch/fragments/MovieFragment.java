@@ -1,6 +1,5 @@
 package vn.brine.haileader.expolatorysearch.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -94,16 +93,6 @@ public class MovieFragment extends Fragment
                 Toast.makeText(getContext(), "URI: " + movie.getUri(), Toast.LENGTH_SHORT).show();
             }
         }));
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     @Override
