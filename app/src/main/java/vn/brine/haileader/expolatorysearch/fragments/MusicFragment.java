@@ -15,8 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.cunoraz.tagview.Tag;
+import com.cunoraz.tagview.TagView;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Literal;
@@ -26,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vn.brine.haileader.expolatorysearch.R;
-import vn.brine.haileader.expolatorysearch.activity.MainActivity;
 import vn.brine.haileader.expolatorysearch.adapter.SearchResultAdapter;
 import vn.brine.haileader.expolatorysearch.dbpedia.asynctasks.SlidingWindowAsynctask;
 import vn.brine.haileader.expolatorysearch.models.DividerItemDecoration;
@@ -42,11 +44,14 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
 
     private EditText mEdtSearch;
     private RecyclerView mRecyclerViewSearch;
+    private TagView mTagGroupSearch;
+    private RelativeLayout mRltSearchKeyword, mRltSearchExploratory;
 
     private SearchResultAdapter mSearchAdapter;
 
     private List<String> mListKeyword;
     private List<SearchResult> mListsearchResult;
+    private List<String> mListUriToSearchExploratory;
 
     private boolean isNetworkAvaiable = true;
 
@@ -65,12 +70,10 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         createUI(view);
         init();
         recyclerViewListener();
-        if(NetworkHelper.isInternetAvailable(getContext()))
-        {
+        tagViewListener();
+        if(NetworkHelper.isInternetAvailable(getContext())) {
             isNetworkAvaiable = true;
-        }
-        else
-        {
+        }else {
             isNetworkAvaiable = false;
             Toast.makeText(getContext(),"No Network connection available", Toast.LENGTH_SHORT).show();
         }
@@ -78,15 +81,21 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
 
     private void createUI(View view){
         mEdtSearch = (EditText)view.findViewById(R.id.edt_search);
-        Button mBtnSearch = (Button) view.findViewById(R.id.btn_search);
+        Button mBtnSearchKeyword = (Button) view.findViewById(R.id.btn_search_keyword);
+        Button mBtnSearchExploratory = (Button) view.findViewById(R.id.btn_search_exploratory);
         mRecyclerViewSearch = (RecyclerView)view.findViewById(R.id.recycle_result);
+        mTagGroupSearch = (TagView) view.findViewById(R.id.tag_group_uri);
+        mRltSearchKeyword = (RelativeLayout) view.findViewById(R.id.rlt_search_keyword);
+        mRltSearchExploratory = (RelativeLayout) view.findViewById(R.id.rlt_search_exploratory);
 
-        mBtnSearch.setOnClickListener(this);
+        mBtnSearchKeyword.setOnClickListener(this);
+        mBtnSearchExploratory.setOnClickListener(this);
     }
 
     private void init(){
         mListKeyword = new ArrayList<>();
         mListsearchResult = new ArrayList<>();
+        mListUriToSearchExploratory = new ArrayList<>();
 
         mSearchAdapter = new SearchResultAdapter(getContext(), mListsearchResult, this);
 
@@ -104,13 +113,12 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btn_search:
+            case R.id.btn_search_keyword:
                 String keywords = getKeywordInput();
                 if(keywords != null){
                     analysisAndSearchQueryEntity(keywords);
                 }
                 break;
-
         }
     }
 
@@ -121,16 +129,43 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
                     @Override
                     public void onItemClick(View view, int position) {
                         //TODO: onItemclick
-                        showLogAndToast("On item click");
                     }
 
                     @Override
                     public void onItemLongClick(View view, int position) {
                         //TODO: onItemlong click
-                        showLogAndToast("On item long click");
                     }
                 }));
     }
+
+    private void tagViewListener(){
+        mTagGroupSearch.setOnTagClickListener(new TagView.OnTagClickListener() {
+            @Override
+            public void onTagClick(Tag tag, int i) {
+                showLogAndToast("onTagClick");
+            }
+        });
+
+        mTagGroupSearch.setOnTagDeleteListener(new TagView.OnTagDeleteListener() {
+            @Override
+            public void onTagDeleted(TagView tagView, Tag tag, int i) {
+                showLogAndToast("onTagDeleted");
+                mTagGroupSearch.remove(i);
+                if(canHideSearchExploratoryView()){
+                    hideSearchExploratoryView();
+                }
+                mListUriToSearchExploratory.remove(i);
+            }
+        });
+
+        mTagGroupSearch.setOnTagLongClickListener(new TagView.OnTagLongClickListener() {
+            @Override
+            public void onTagLongClick(Tag tag, int i) {
+                showLogAndToast("onTagLongClick");
+            }
+        });
+    }
+
 
     @Override
     public void detailsProfileOfUri(String uri) {
@@ -145,7 +180,40 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void addUriToSearch(String uri) {
+        showSearchExploratoryView();
+        if(mListUriToSearchExploratory.contains(uri)){
+            showLogAndToast("Added");
+        }
+        String[] list = uri.split("/");
+        showLogAndToast(list[list.length - 1]);
 
+        Tag tag = new Tag(list[list.length - 1]);
+        tag.isDeletable = true;
+        tag.radius = 10f;
+
+        mListUriToSearchExploratory.add(uri);
+        mTagGroupSearch.addTag(tag);
+    }
+
+    private boolean canHideSearchExploratoryView(){
+        if(mTagGroupSearch.getTags().size() == 0){
+            return true;
+        }
+        return false;
+    }
+
+    private void showSearchExploratoryView(){
+        if(mRltSearchExploratory.getVisibility() == View.GONE){
+            mRltSearchExploratory.setVisibility(View.VISIBLE);
+            mRltSearchKeyword.setVisibility(View.GONE);
+        }
+    }
+
+    private void hideSearchExploratoryView(){
+        if(mRltSearchExploratory.getVisibility() == View.VISIBLE){
+            mRltSearchExploratory.setVisibility(View.GONE);
+            mRltSearchKeyword.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
