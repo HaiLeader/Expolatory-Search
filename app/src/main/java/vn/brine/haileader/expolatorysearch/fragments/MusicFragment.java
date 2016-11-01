@@ -33,6 +33,7 @@ import vn.brine.haileader.expolatorysearch.adapter.SearchResultAdapter;
 import vn.brine.haileader.expolatorysearch.dbpedia.asynctasks.SlidingWindowAsynctask;
 import vn.brine.haileader.expolatorysearch.models.DividerItemDecoration;
 import vn.brine.haileader.expolatorysearch.models.SearchResult;
+import vn.brine.haileader.expolatorysearch.utils.DbpediaMusicConstant;
 import vn.brine.haileader.expolatorysearch.utils.NetworkHelper;
 import vn.brine.haileader.expolatorysearch.views.RecyclerItemClickListener;
 
