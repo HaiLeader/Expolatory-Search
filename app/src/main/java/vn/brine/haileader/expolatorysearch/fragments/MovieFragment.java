@@ -68,7 +68,7 @@ public class MovieFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mSearchBtn = (Button)view.findViewById(R.id.btn_search);
+        mSearchBtn = (Button)view.findViewById(R.id.btn_search_keyword);
         mSearchText = (EditText)view.findViewById(R.id.searchText);
         mTopRecycler = (RecyclerView)view.findViewById(R.id.top_result_recycler);
         mRecommendRecycler = (RecyclerView)
@@ -132,7 +132,7 @@ public class MovieFragment extends Fragment
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_search:
+            case R.id.btn_search_keyword:
                 //mSearchText.setFocusable(false);
                 String textSearch = mSearchText.getText().toString();
                 if (textSearch.equals("")) return;

@@ -70,4 +70,5 @@ public class Utils {
 //                "  FILTER langMatches( lang(?abstract), \"en\")\n" +
         return queryString;
     }
+
 }

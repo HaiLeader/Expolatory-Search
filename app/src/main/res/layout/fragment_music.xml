@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="vn.brine.haileader.expolatorysearch.fragments.MusicFragment">
+    tools:context=".fragments.MusicFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,6 +10,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/rlt_search_keyword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -22,11 +23,39 @@
                 android:imeOptions="actionDone"/>
 
             <Button
-                android:id="@+id/btn_search"
+                android:id="@+id/btn_search_keyword"
                 android:layout_below="@+id/edt_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_search"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlt_search_exploratory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <ScrollView
+                android:id="@+id/tags_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_6sdp">
+
+                <com.cunoraz.tagview.TagView
+                    android:id="@+id/tag_group_uri"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp" />
+            </ScrollView>
+
+            <Button
+                android:id="@+id/btn_search_exploratory"
+                android:layout_below="@+id/tags_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_search"/>
+
         </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
