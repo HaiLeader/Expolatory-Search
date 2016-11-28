@@ -24,7 +24,8 @@ public class SearchTabFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_search_tab,null);
 
         tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);

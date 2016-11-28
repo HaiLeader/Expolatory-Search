@@ -68,22 +68,25 @@ public class MovieFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mSearchBtn = (Button)view.findViewById(R.id.btn_search);
+        mSearchBtn = (Button)view.findViewById(R.id.btn_search_keyword);
         mSearchText = (EditText)view.findViewById(R.id.searchText);
         mTopRecycler = (RecyclerView)view.findViewById(R.id.top_result_recycler);
-        mRecommendRecycler = (RecyclerView)view.findViewById(R.id.recommend_result_recycler);
+        mRecommendRecycler = (RecyclerView)
+                view.findViewById(R.id.recommend_result_recycler);
 
         init();
 
         mSearchBtn.setOnClickListener(this);
-        mTopRecycler.addOnItemTouchListener(new RecyclerTouchListener(getContext(), mTopRecycler, new ClickListener() {
+        mTopRecycler.addOnItemTouchListener(new RecyclerTouchListener(getContext(),
+                mTopRecycler, new ClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Movie movie = mTopMovies.get(position);
                 Toast.makeText(getContext(), "URI: " + movie.getUri(), Toast.LENGTH_SHORT).show();
             }
         }));
-        mRecommendRecycler.addOnItemTouchListener(new RecyclerTouchListener(getContext(), mRecommendRecycler, new ClickListener() {
+        mRecommendRecycler.addOnItemTouchListener(
+                new RecyclerTouchListener(getContext(), mRecommendRecycler, new ClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Movie movie = mRecommendMovies.get(position);
@@ -102,7 +105,8 @@ public class MovieFragment extends Fragment
                 Literal literal = querySolution.getLiteral("label");
                 Resource movieUri = (Resource) querySolution.get("movie");
                 Resource thumbnailUri = (Resource) querySolution.get("thumbnail");
-                Movie movie = new Movie(literal.getValue().toString(), thumbnailUri.getURI(), movieUri.getURI());
+                Movie movie = new Movie(
+                        literal.getValue().toString(), thumbnailUri.getURI(), movieUri.getURI());
                 updateResultTop(movie);
             }
         }
@@ -118,7 +122,8 @@ public class MovieFragment extends Fragment
                 Literal literal = querySolution.getLiteral("label");
                 Resource movieUri = (Resource) querySolution.get("movie");
                 Resource thumbnailUri = (Resource) querySolution.get("thumbnail");
-                Movie movie = new Movie(literal.getValue().toString(), thumbnailUri.getURI(), movieUri.getURI());
+                Movie movie = new Movie(
+                        literal.getValue().toString(), thumbnailUri.getURI(), movieUri.getURI());
                 updateResultRecommend(movie);
             }
         }
@@ -127,8 +132,8 @@ public class MovieFragment extends Fragment
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_search:
-                mSearchText.setFocusable(false);
+            case R.id.btn_search_keyword:
+                //mSearchText.setFocusable(false);
                 String textSearch = mSearchText.getText().toString();
                 if (textSearch.equals("")) return;
                 analyzeInputData(textSearch);
@@ -147,16 +152,20 @@ public class MovieFragment extends Fragment
         mRecommendAdapter = new MovieAdapter(getContext(), mRecommendMovies);
 
         mTopRecycler.setHasFixedSize(true);
-        RecyclerView.LayoutManager topLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView.LayoutManager topLayoutManager =
+                new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         mTopRecycler.setLayoutManager(topLayoutManager);
-        mTopRecycler.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.HORIZONTAL));
+        mTopRecycler.addItemDecoration(
+                new DividerItemDecoration(getContext(), LinearLayout.HORIZONTAL));
         mTopRecycler.setItemAnimator(new DefaultItemAnimator());
         mTopRecycler.setAdapter(mTopAdapter);
 
         mRecommendRecycler.setHasFixedSize(true);
-        RecyclerView.LayoutManager recommendLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView.LayoutManager recommendLayoutManager =
+                new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         mRecommendRecycler.setLayoutManager(recommendLayoutManager);
-        mRecommendRecycler.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.HORIZONTAL));
+        mRecommendRecycler.addItemDecoration(
+                new DividerItemDecoration(getContext(), LinearLayout.HORIZONTAL));
         mRecommendRecycler.setItemAnimator(new DefaultItemAnimator());
         mRecommendRecycler.setAdapter(mRecommendAdapter);
     }
@@ -198,7 +207,8 @@ public class MovieFragment extends Fragment
         private GestureDetector gestureDetector;
         private ClickListener clickListener;
 
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final MovieFragment.ClickListener clickListener) {
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView,
+                                     final MovieFragment.ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override

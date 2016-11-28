@@ -90,7 +90,7 @@ public class TestFragment extends Fragment
 
     private void findIdLayout(View view){
         mSearchText = (EditText) view.findViewById(R.id.searchText);
-        mSearchBtn = (Button) view.findViewById(R.id.btn_search);
+        mSearchBtn = (Button) view.findViewById(R.id.btn_search_keyword);
         mSearchResultLayout = (RelativeLayout)view.findViewById(R.id.search_keyword_result_relative);
         mIntrodution = (RelativeLayout) view.findViewById(R.id.app_introduction);
         mTopRecyclerView = (RecyclerView)view.findViewById(R.id.top_result_recycler);
@@ -154,7 +154,7 @@ public class TestFragment extends Fragment
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_search:
+            case R.id.btn_search_keyword:
                 String textSearch = mSearchText.getText().toString();
                 if (textSearch.equals("")) return;
                 analyzeInputData(textSearch);
