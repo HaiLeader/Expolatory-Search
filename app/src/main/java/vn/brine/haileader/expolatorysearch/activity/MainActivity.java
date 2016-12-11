@@ -18,7 +18,6 @@ import vn.brine.haileader.expolatorysearch.R;
 import vn.brine.haileader.expolatorysearch.fragments.FavoriteFragment;
 import vn.brine.haileader.expolatorysearch.fragments.MusicFragment;
 import vn.brine.haileader.expolatorysearch.fragments.SettingFragment;
-import vn.brine.haileader.expolatorysearch.fragments.TestFragment;
 import vn.brine.haileader.expolatorysearch.fragments.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 break;
             default:
-                fragmentClass = TestFragment.class;
+                fragmentClass = MusicFragment.class;
         }
         try {
             assert fragmentClass != null;

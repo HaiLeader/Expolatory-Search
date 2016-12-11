@@ -41,7 +41,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
         SlidingWindowAsynctask.SlidingWindowCallback, SearchResultAdapter.SearchResultAdapterCallback {
 
     public static final String TAG = MusicFragment.class.getCanonicalName();
-    private static final String FILE_NAME = "assets/user_profile.rdf";
+//    private static final String FILE_NAME = "assets/user_profile.rdf";
 
     private EditText mEdtSearch;
     private RecyclerView mRecyclerViewSearch;
@@ -259,6 +259,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener,
     }
 
     private void analysisAndSearchQueryEntity(String keywords){
+
         splitTextSearchToPhrase(keywords);
         slidingWindowSearch();
     }

@@ -52,7 +52,7 @@ public class SearchTabFragment extends Fragment {
         public Fragment getItem(int position)
         {
             switch (position){
-                case 0 : return new MovieFragment();
+                case 0 : return new MusicFragment();
                 case 1 : return new MusicFragment();
             }
             return null;

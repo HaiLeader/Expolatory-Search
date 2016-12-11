@@ -12,7 +12,7 @@ public class NetworkHelper {
     private static final String TAG=NetworkHelper.class.getSimpleName();
     public static boolean isInternetAvailable(Context context)
     {
-        NetworkInfo info = (NetworkInfo) ((ConnectivityManager)
+        NetworkInfo info = ((ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
 
         if (info == null)
