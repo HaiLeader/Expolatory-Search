@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_inference_rule"
+        android:title="@string/inference_rules" />
+    <item
+        android:id="@+id/menu_entity_lookup"
+        android:title="@string/entity_label_lookup"/>
+    <item
+        android:id="@+id/menu_uri_lookup"
+        android:title="@string/entity_uri_lookup"/>
+</menu>

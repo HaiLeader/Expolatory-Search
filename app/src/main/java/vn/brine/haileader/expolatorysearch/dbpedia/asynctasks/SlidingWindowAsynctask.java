@@ -50,12 +50,13 @@ public class SlidingWindowAsynctask extends AsyncTask<List<String>, Void, List<R
             throw new RuntimeException("Input is not a list of keywords");
         }
         List<String> keywords = lists[0];
-        List<ResultSet> resultSets = new ArrayList<>();
+        List<ResultSet> accuracyEntities = new ArrayList<>();
+        List<ResultSet> expandEntities = new ArrayList<>();
 
-        //searchAccuracyEntities(keywords, resultSets);
-        searchExpandEntities(keywords, resultSets);
+//        searchAccuracyEntities(keywords, accuracyEntities);
+        searchExpandEntities(keywords, expandEntities);
 
-        return resultSets;
+        return expandEntities;
     }
 
     @Override
@@ -68,34 +69,34 @@ public class SlidingWindowAsynctask extends AsyncTask<List<String>, Void, List<R
     }
 
     private void searchAccuracyEntities(List<String> keywords, List<ResultSet> resultSets){
-        for(String keyword: keywords){
-            if(isStopWord(keyword)) continue;
-            String queryString = Utils.searchAccuracyEntitiesQuery(keyword);
-            Query query = QueryFactory.create(queryString);
-            QueryExecution qexc = QueryExecutionFactory.createServiceRequest(Config.DBPEDIA_ENDPOINT, query);
-            ResultSet resultSet = qexc.execSelect();
-            if(resultSet != null){
-                resultSets.add(resultSet);
-            }
-            qexc.close();
-        }
+//        for(String keyword: keywords){
+//            if(isStopWord(keyword)) continue;
+//            String queryString = Utils.searchAccuracyEntitiesQuery(keyword);
+//            Query query = QueryFactory.create(queryString);
+//            QueryExecution qexc = QueryExecutionFactory.createServiceRequest(Config.DBPEDIA_ENDPOINT, query);
+//            ResultSet resultSet = qexc.execSelect();
+//            if(resultSet != null){
+//                resultSets.add(resultSet);
+//            }
+//            qexc.close();
+//        }
     }
 
     private void searchExpandEntities(List<String> keywords, List<ResultSet> resultSets){
-        for(String keyword: keywords){
-            if(isStopWord(keyword)) continue;
-            String queryString = Utils.searchExpandEntitiesQuery(keyword);
-            Query query = QueryFactory.create(queryString);
-            QueryExecution qexc = QueryExecutionFactory.createServiceRequest(Config.DBPEDIA_ENDPOINT, query);
-            ResultSet resultSet = qexc.execSelect();
-            if(resultSet != null){
-                resultSets.add(resultSet);
-            }
-            qexc.close();
-        }
+//        for(String keyword: keywords){
+//            if(isStopWord(keyword)) continue;
+//            String queryString = Utils.searchExpandEntitiesQuery(keyword);
+//            Query query = QueryFactory.create(queryString);
+//            QueryExecution qexc = QueryExecutionFactory.createServiceRequest(Config.DBPEDIA_ENDPOINT, query);
+//            ResultSet resultSet = qexc.execSelect();
+//            if(resultSet != null){
+//                resultSets.add(resultSet);
+//            }
+//            qexc.close();
+//        }
     }
 
-    public boolean isStopWord(String word) {
+    private boolean isStopWord(String word) {
         List<String> listStopWord = Arrays.asList(Config.STOP_WORD);
         return listStopWord.contains(word);
     }

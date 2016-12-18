@@ -1,6 +1,8 @@
 package vn.brine.haileader.expolatorysearch.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -8,7 +10,50 @@ import java.util.Map;
  */
 public class DbpediaMusicConstant {
     public static final Map<String, String> sMusicProperties;
+    public static final List<String> sListMusicProperty = new ArrayList<>();
     public static final Map<String, String> sMusicOntologies;
+    public static final List<String> sListMusicOntology = new ArrayList<>();
+
+    static {
+        sListMusicProperty.add("artist");
+        sListMusicProperty.add("lyricist");
+        sListMusicProperty.add("recorded");
+        sListMusicProperty.add("album");
+        sListMusicProperty.add("bSide");
+        sListMusicProperty.add("certification");
+        sListMusicProperty.add("composer");
+        sListMusicProperty.add("description");
+        sListMusicProperty.add("fromAlbum");
+        sListMusicProperty.add("genre");
+        sListMusicProperty.add("lastSingle");
+        sListMusicProperty.add("nextSingle");
+        sListMusicProperty.add("prev");
+        sListMusicProperty.add("producer");
+        sListMusicProperty.add("released");
+        sListMusicProperty.add("title");
+        sListMusicProperty.add("type");
+        sListMusicProperty.add("writer");
+        sListMusicProperty.add("name");
+        sListMusicProperty.add("song");
+        sListMusicProperty.add("trackNo");
+        sListMusicProperty.add("cover");
+        sListMusicProperty.add("birthPlace");
+        sListMusicProperty.add("alias");
+        sListMusicProperty.add("background");
+        sListMusicProperty.add("birthDate");
+        sListMusicProperty.add("website");
+        sListMusicProperty.add("yearsActive");
+        sListMusicProperty.add("derivatives");
+        sListMusicProperty.add("instruments");
+        sListMusicProperty.add("stylisticOrigins");
+        sListMusicProperty.add("deathDate");
+        sListMusicProperty.add("dateOfBirth");
+        sListMusicProperty.add("dateOfDeath");
+        sListMusicProperty.add("shortDescription");
+        sListMusicProperty.add("alternativeNames");
+        sListMusicProperty.add("placeOfBirth");
+        sListMusicProperty.add("placeOfDeath");
+    }
 
     static {
         sMusicProperties = new HashMap<>();
@@ -53,6 +98,31 @@ public class DbpediaMusicConstant {
     }
 
     static {
+        sListMusicOntology.add("thumbnail");
+        sListMusicOntology.add("nextLink");
+        sListMusicOntology.add("abstract");
+        sListMusicOntology.add("album");
+        sListMusicOntology.add("artist");
+        sListMusicOntology.add("composer");
+        sListMusicOntology.add("genre");
+        sListMusicOntology.add("language");
+        sListMusicOntology.add("lyrics");
+        sListMusicOntology.add("previousWork");
+        sListMusicOntology.add("producer");
+        sListMusicOntology.add("recordDate");
+        sListMusicOntology.add("recordLabel");
+        sListMusicOntology.add("recordedIn");
+        sListMusicOntology.add("releaseDate");
+        sListMusicOntology.add("soundRecording");
+        sListMusicOntology.add("trackNumber");
+        sListMusicOntology.add("type");
+        sListMusicOntology.add("imdbId");
+        sListMusicOntology.add("nextAlbum");
+        sListMusicOntology.add("deathPlace");
+        sListMusicOntology.add("birthPlace");
+    }
+
+    static {
         sMusicOntologies = new HashMap<>();
         sMusicOntologies.put("thumbnail", "http://dbpedia.org/ontology/thumbnail");
         sMusicOntologies.put("nextLink", "http://dbpedia.org/property/nextLink");
@@ -78,6 +148,14 @@ public class DbpediaMusicConstant {
         sMusicOntologies.put("birthDate", "http://dbpedia.org/property/birthDate");
         sMusicOntologies.put("deathPlace", "http://dbpedia.org/property/deathPlace");
         sMusicOntologies.put("birthPlace", "http://dbpedia.org/property/birthPlace");
+    }
+
+    public static List<String> getMusicProperty(){
+        return sListMusicProperty;
+    }
+
+    public static List<String> getMusicOntology(){
+        return sListMusicOntology;
     }
 
     public static Map<String, String> getsMusicProperties(){

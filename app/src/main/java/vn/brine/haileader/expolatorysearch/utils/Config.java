@@ -44,5 +44,27 @@ public class Config {
                 "would", "wouldn't", "you", "you'd", "you'll", "you're", "you've", "your",
                 "yours", "yourself", "yourselves"
             };
+
+    public static final String[] INFERENCE_RULES = {
+            "none",
+            "b3sonto",
+            "b3sifp",
+            "dbprdf-label",
+            "facets",
+            "virtrdf-label",
+            "http://dbpedia.org/resource/classes#",
+            "http://dbpedia.org/resource/classes/opencyc#",
+            "http://dbpedia.org/resource/classes/umbel#",
+            "http://dbpedia.org/resource/classes/yago#",
+            "http://dbpedia.org/schema/property_rules#",
+            "http://www.ontologyportal.org/SUMO",
+            "http://www.ontologyportal.org/WordNet#",
+            "http://www.w3.org/2002/07/owl#",
+            "http://www.w3.org/ns/ldp#",
+            "http://www.openlinksw.com/schemas/oplweb#",
+            "urn:rules.skos",
+            "virtpivot-rules",
+            "virtrdf-label"
+    };
 }
 

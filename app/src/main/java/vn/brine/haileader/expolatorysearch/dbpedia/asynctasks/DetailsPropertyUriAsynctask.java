@@ -45,7 +45,7 @@ public class DetailsPropertyUriAsynctask extends AsyncTask<String, Void, ResultS
             throw new RuntimeException("Input is not a list of keywords");
         }
         String uri = strings[0];
-        String queryString = Utils.searchDetailsProfileOfUriQuery(uri);
+        String queryString = "";//Utils.searchDetailsProfileOfUriQuery(uri);
         Query query = QueryFactory.create(queryString);
         QueryExecution qexc = QueryExecutionFactory.createServiceRequest(Config.DBPEDIA_ENDPOINT, query);
         ResultSet resultSet = qexc.execSelect();
