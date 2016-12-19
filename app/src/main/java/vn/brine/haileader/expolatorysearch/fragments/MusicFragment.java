@@ -194,20 +194,24 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         try {
             JSONObject jsonObject = new JSONObject(response);
             JSONArray data = jsonObject.getJSONObject("results").getJSONArray("bindings");
-            for(int i = 0; i < data.length(); i++){
-                JSONObject element = data.getJSONObject(i);
-                String uri = element.getJSONObject("c1").getString("value");
+            if(data.length() == 0){
+                showLogAndToast("No results");
+            }else{
+                for(int i = 0; i < data.length(); i++){
+                    JSONObject element = data.getJSONObject(i);
+                    String uri = element.getJSONObject("c1").getString("value");
 
-                List<String> splitUri = Arrays.asList(uri.split("/"));
-                String localName = splitUri.get(splitUri.size()-1);
-                String label = localName.replace("_", " ");
+                    List<String> splitUri = Arrays.asList(uri.split("/"));
+                    String localName = splitUri.get(splitUri.size()-1);
+                    String label = localName.replace("_", " ");
 
-                String description = element.getJSONObject("c2").getString("value");
-                double score = element.getJSONObject("sc").getDouble("value");
-                double rank = element.getJSONObject("rank").getDouble("value");
+                    String description = element.getJSONObject("c2").getString("value");
+                    double score = element.getJSONObject("sc").getDouble("value");
+                    double rank = element.getJSONObject("rank").getDouble("value");
 
-                FSResult result = new FSResult(uri, label, description, score, rank);
-                updateResult(result);
+                    FSResult result = new FSResult(uri, label, description, score, rank);
+                    updateResult(result);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
