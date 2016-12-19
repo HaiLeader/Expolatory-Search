@@ -36,7 +36,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import vn.brine.haileader.expolatorysearch.R;
 import vn.brine.haileader.expolatorysearch.adapter.FSAdapter;
@@ -49,6 +51,10 @@ import vn.brine.haileader.expolatorysearch.utils.Utils;
 public class MusicFragment extends Fragment implements View.OnClickListener{
 
     public static final String TAG = MusicFragment.class.getCanonicalName();
+    public static final String TYPE_OPTION = "type";
+    public static final String ATTRIBUTE_OPTION = "attribute";
+    public static final String VALUE_OPTION = "value";
+    public static final String DISTINCT_OPTION = "distinct";
 
     private EditText mEdtSearch;
     private ImageView mImgSearchOption;
@@ -60,7 +66,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
     private List<FSResult> mFSResults;
 
     private String keywordSeach;
-    private List<String> facetedSearchOptions;
+    private Map<String, String> mapSearchOptions;
 
     public MusicFragment() {
     }
@@ -122,9 +128,9 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
                 String keywords = getKeywordInput();
                 if(keywords != null){
                     keywordSeach = keywords;
-                    facetedSearchOptions = new ArrayList<>();
+                    mapSearchOptions = new HashMap<>();
                     hideSearchInput();
-                    facetedSearch(keywords, facetedSearchOptions);
+                    facetedSearch(keywords, "");
                 }
                 break;
             case R.id.img_search_option:
@@ -159,12 +165,12 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    private void facetedSearch(String keywords, List<String> options){
+    private void facetedSearch(String keywords, String optionSearch){
         mFSResults.clear();
         mFSAdapter.notifyDataSetChanged();
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url = Utils.createUrlFacetedSearch(keywords, options);
+        String url = Utils.createUrlFacetedSearch(keywords, optionSearch);
 
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading...");
@@ -303,7 +309,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        showDialogEntity(entities);
+        showDialogEntity(entities, TYPE_OPTION);
     }
 
     /*===========================================*/
@@ -350,7 +356,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        showDialogEntity(entities);
+        showDialogEntity(entities, ATTRIBUTE_OPTION);
     }
 
     /*===================================================*/
@@ -397,7 +403,7 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        showDialogEntity(entities);
+        showDialogEntity(entities, VALUE_OPTION);
     }
 
     /*===================================================*/
@@ -444,12 +450,12 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        showDialogEntity(entities);
+        showDialogEntity(entities, DISTINCT_OPTION);
     }
 
     /*====================================================*/
 
-    private void showDialogEntity(final List<String> entities){
+    private void showDialogEntity(final List<String> entities, final String typeFilter){
         String[] strarray = new String[entities.size()];
         entities.toArray(strarray);
 
@@ -461,12 +467,12 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                         if(isChecked){
-                            if(!facetedSearchOptions.contains(entities.get(which))){
-                                facetedSearchOptions.add(entities.get(which));
+                            if(!mapSearchOptions.containsKey(entities.get(which))){
+                                mapSearchOptions.put(entities.get(which), typeFilter);
                             }
                         }else{
-                            if(facetedSearchOptions.contains(entities.get(which))){
-                                facetedSearchOptions.remove(entities.get(which));
+                            if(mapSearchOptions.containsKey(entities.get(which))){
+                                mapSearchOptions.remove(entities.get(which));
                             }
                         }
                     }
@@ -474,17 +480,58 @@ public class MusicFragment extends Fragment implements View.OnClickListener{
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        facetedSearch(keywordSeach, facetedSearchOptions);
+                        String optionSearch = createOptionSearch();
+                        facetedSearch(keywordSeach, optionSearch);
                     }
                 })
                 .setNegativeButton("Cancel", null)
                 .show();
     }
 
+    private String createOptionSearch(){
+        String optionSearch = "";
+
+        for(Map.Entry<String, String> entry: mapSearchOptions.entrySet()){
+            switch (entry.getValue()){
+                case TYPE_OPTION:
+                    optionSearch += createQueryInstanceOfType(entry.getKey());
+                    break;
+                case ATTRIBUTE_OPTION:
+                    optionSearch += createQueryHasAttribute(entry.getKey());
+                    break;
+                case VALUE_OPTION:
+                    optionSearch += createQueryValueOfAttribute(entry.getKey());
+                    break;
+                case DISTINCT_OPTION:
+
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return optionSearch;
+    }
+
+    private String createQueryInstanceOfType(String uri){
+        String option = " ?s1 a " + "<" + uri + "> .\n" ;
+        return option;
+    }
+
+    private String createQueryHasAttribute(String uri){
+        showLogAndToast("Attribute");
+        return "";
+    }
+
+    private String createQueryValueOfAttribute(String uri){
+        showLogAndToast("Value");
+        return "";
+    }
+
     private boolean[] getCheckedItem(List<String> entities){
         boolean[] checkedItem = new boolean[entities.size()];
         for(int i = 0; i < entities.size(); i++){
-            checkedItem[i] = facetedSearchOptions.contains(entities.get(i));
+            checkedItem[i] = mapSearchOptions.containsKey(entities.get(i));
         }
         return checkedItem;
     }

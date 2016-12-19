@@ -17,8 +17,8 @@ public class Utils {
     private static final String RESULT_JSON_TYPE = "&format=application%2Fsparql-results%2Bjson&CXML_redir_for_subjs=121&CXML_redir_for_hrefs=&timeout=30000";
 
     /* Faceted Search Dbpedia */
-    public static String createUrlFacetedSearch(String keyword, List<String> options){
-        String query = createQueryFacetedSearch(keyword, options);
+    public static String createUrlFacetedSearch(String keyword, String optionSearch){
+        String query = createQueryFacetedSearch(keyword, optionSearch);
         String url = "";
         try {
             url = BASE_URL_DBPEDIA + URLEncoder.encode(query, "UTF-8") + RESULT_JSON_TYPE;
@@ -29,11 +29,10 @@ public class Utils {
         return url;
     }
 
-    private static String createQueryFacetedSearch(String keyword, List<String> options){
+    private static String createQueryFacetedSearch(String keyword, String optionSearch){
         List<String> listWord = Arrays.asList(keyword.split(" "));
         String bifVectorParams = getBifVectorParams(keyword);
         String bifContainParams = getBifContainParams(keyword);
-        String filterExistsParams = getFilterExistsParams(options);
 
         String query = "     select ?s1 as ?c1, (bif:search_excerpt (bif:vector (" + bifVectorParams + "), ?o1)) as ?c2, ?sc, ?rank, ?g where {{{ select ?s1, (?sc * 3e-1) as ?sc, ?o1, (sql:rnk_scale (<LONG::IRI_RANK> (?s1))) as ?rank, ?g where  \n" +
                 "  { \n" +
@@ -46,12 +45,7 @@ public class Utils {
                 "        \n" +
                 "      }\n" +
                 "     }\n" +
-                "    filter exists \n" +
-                "    { \n" +
-                "      " + filterExistsParams + "\n" +
-                "    }\n" +
-                "   .\n" +
-                "    \n" +
+                "    "  + optionSearch + "\n" +
                 "  }\n" +
                 " order by desc (?sc * 3e-1 + sql:rnk_scale (<LONG::IRI_RANK> (?s1)))  limit 50  offset 0 }}} ";
         showLog(query);
@@ -226,15 +220,6 @@ public class Utils {
         }
         showLog("Vector param: " + bifVectorParams);
         return bifVectorParams;
-    }
-
-    private static String getFilterExistsParams(List<String> options){
-        String filterParam = "";
-        for(int i = 0; i < options.size(); i++){
-            filterParam += " ?s1 a " + "<" + options.get(i) + "> .\n" ;
-        }
-        showLog("Fileter param: " + filterParam);
-        return filterParam;
     }
 
     private static void showLog(String message){
