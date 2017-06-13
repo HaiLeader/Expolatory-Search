@@ -210,7 +210,7 @@ public class Note {
                 " }\n" +
                 " UNION{ <" + uri + "> dbpedia-owl:artist ?artist . }\n" +
                 " UNION{ <" + uri + "> dbpedia-owl:genre ?genre . }\n" +
-                " UNION{ <" + uri + "> dbpedia-owl:releaseDate ?releaseDate .}\n" +
+                " UNION{ <" + uri + "> dbpedixa-owl:releaseDate ?releaseDate .}\n" +
                 " UNION{ <" + uri + "> dbpedia-owl:producer ?producer. }\n" +
                 " UNION{ <" + uri + "> dbpedia-owl:thumbnail ?thumbnail .}\n" +
                 "}";
